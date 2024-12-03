@@ -1,3 +1,7 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Szemetszallitas.Data;
+using Szemetszallitas.Models;
 namespace Szemetszallitas
 {
     public class Program
@@ -5,6 +9,8 @@ namespace Szemetszallitas
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddDbContext<SzemetszallitasContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("SzemetszallitasContext") ?? throw new InvalidOperationException("Connection string 'SzemetszallitasContext' not found.")));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -29,6 +35,8 @@ namespace Szemetszallitas
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            SeedData.EnsurePopulated(app);
 
             app.Run();
         }
