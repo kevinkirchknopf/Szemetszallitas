@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.datum)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SzolgId)
+                @Html.DisplayNameFor(model => model.Szolgaltatas!.tipus)
             </th>
             <th></th>
         </tr>
@@ -28,7 +28,7 @@
                 @Html.DisplayFor(modelItem => item.datum)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SzolgId)
+                    @Html.DisplayFor(modelItem => item.Szolgaltatas!.tipus)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

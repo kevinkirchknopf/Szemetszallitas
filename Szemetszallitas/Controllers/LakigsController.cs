@@ -22,10 +22,10 @@ namespace Szemetszallitas.Controllers
         // GET: Lakigs
         public async Task<IActionResult> Index()
         {
-
-        
-            return View(await _context.Lakig.ToListAsync());
+            var lakigs = _context.Lakig.Include(l => l.Szolgaltatas);
+            return View(await lakigs.ToListAsync());
         }
+
 
         // GET: Lakigs/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -35,7 +35,7 @@ namespace Szemetszallitas.Controllers
                 return NotFound();
             }
 
-            var lakig = await _context.Lakig
+            var lakig = await _context.Lakig.Include(l => l.Szolgaltatas)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (lakig == null)
             {
@@ -48,6 +48,7 @@ namespace Szemetszallitas.Controllers
         // GET: Lakigs/Create
         public IActionResult Create()
         {
+            ViewData["Szolgaltatasok"] = new SelectList(_context.Szolgaltatas, "Id", "tipus");
             return View();
         }
 
@@ -64,6 +65,9 @@ namespace Szemetszallitas.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            
+            ViewData["Szolgaltatasok"] = new SelectList(_context.Szolgaltatas, "Id", "tipus", lakig.Szolgid);
             return View(lakig);
         }
 
@@ -80,6 +84,7 @@ namespace Szemetszallitas.Controllers
             {
                 return NotFound();
             }
+            ViewData["Szolgaltatasok"] = new SelectList(_context.Szolgaltatas, "Id", "tipus", lakig.Szolgid);
             return View(lakig);
         }
 
@@ -115,8 +120,12 @@ namespace Szemetszallitas.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            
+            ViewBag.Szolgaltatasok = new SelectList(_context.Szolgaltatas, "Id", "tipus", lakig.Szolgid);
             return View(lakig);
         }
+
 
         // GET: Lakigs/Delete/5
         public async Task<IActionResult> Delete(int? id)

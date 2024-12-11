@@ -12,8 +12,8 @@ using Szemetszallitas.Data;
 namespace Szemetszallitas.Migrations
 {
     [DbContext(typeof(SzemetszallitasContext))]
-    [Migration("20241126083946_InitalCreate")]
-    partial class InitalCreate
+    [Migration("20241211193627_Migration2")]
+    partial class Migration2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,9 +33,6 @@ namespace Szemetszallitas.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("SzolgaltatasId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Szolgid")
                         .HasColumnType("int");
 
@@ -47,7 +44,7 @@ namespace Szemetszallitas.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SzolgaltatasId");
+                    b.HasIndex("Szolgid");
 
                     b.ToTable("Lakig");
                 });
@@ -63,15 +60,12 @@ namespace Szemetszallitas.Migrations
                     b.Property<int>("SzolgId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SzolgaltatasId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("datum")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SzolgaltatasId");
+                    b.HasIndex("SzolgId");
 
                     b.ToTable("Naptar");
                 });
@@ -99,7 +93,9 @@ namespace Szemetszallitas.Migrations
                 {
                     b.HasOne("Szemetszallitas.Models.Szolgaltatas", "Szolgaltatas")
                         .WithMany()
-                        .HasForeignKey("SzolgaltatasId");
+                        .HasForeignKey("Szolgid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Szolgaltatas");
                 });
@@ -108,7 +104,9 @@ namespace Szemetszallitas.Migrations
                 {
                     b.HasOne("Szemetszallitas.Models.Szolgaltatas", "Szolgaltatas")
                         .WithMany()
-                        .HasForeignKey("SzolgaltatasId");
+                        .HasForeignKey("SzolgId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Szolgaltatas");
                 });

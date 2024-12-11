@@ -22,7 +22,8 @@ namespace Szemetszallitas.Controllers
         // GET: Naptars
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Naptar.ToListAsync());
+            return View(await _context.Naptar.Include(n => n.Szolgaltatas).ToListAsync());
+
         }
 
         // GET: Naptars/Details/5
@@ -34,6 +35,7 @@ namespace Szemetszallitas.Controllers
             }
 
             var naptar = await _context.Naptar
+                .Include(n => n.Szolgaltatas)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (naptar == null)
             {
@@ -78,6 +80,7 @@ namespace Szemetszallitas.Controllers
             {
                 return NotFound();
             }
+            ViewData["Szolgaltatasok"] = new SelectList(_context.Szolgaltatas, "Id", "tipus", naptar.SzolgId);
             return View(naptar);
         }
 
@@ -113,6 +116,7 @@ namespace Szemetszallitas.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Szolgaltatasok = new SelectList(_context.Szolgaltatas, "Id", "tipus", naptar.SzolgId);
             return View(naptar);
         }
 
