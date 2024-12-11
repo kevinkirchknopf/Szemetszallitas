@@ -1,0 +1,12 @@
+﻿@model DateTime?
+
+@{
+    ViewData["Title"] = "LastKomDate";
+}
+
+<h1>Last Kom Date</h1>
+
+
+<p class="card-body alert-success">Utolsó kommunális hulladékszállítás dátuma: @Model.Value.ToString("yyyy-MM-dd")</p>
+
+

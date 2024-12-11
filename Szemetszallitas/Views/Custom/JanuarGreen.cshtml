@@ -1,0 +1,23 @@
+﻿@model List<DateTime>
+
+@{
+    ViewData["Title"] = "Zöldhulladék januári szállításai";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Dátum</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var datum in Model)
+        {
+            <tr>
+                <td>@datum.ToString("yyyy-MM-dd")</td>
+            </tr>
+        }
+    </tbody>
+</table>

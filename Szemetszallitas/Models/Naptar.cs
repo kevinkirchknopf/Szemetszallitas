@@ -9,7 +9,7 @@ namespace Szemetszallitas.Models
         public int Id { get; set; }
         [DataType(DataType.Date)]
 
-        public DateTime? datum { get; set; }
+        public DateTime datum { get; set; }
         [ForeignKey("Szolgaltatas")]
         public int SzolgId { get; set; }
         public virtual Szolgaltatas? Szolgaltatas { get; set; }

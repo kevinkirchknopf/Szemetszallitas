@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Szemetszallitas.Data;
 
@@ -11,9 +12,11 @@ using Szemetszallitas.Data;
 namespace Szemetszallitas.Migrations
 {
     [DbContext(typeof(SzemetszallitasContext))]
-    partial class SzemetszallitasContextModelSnapshot : ModelSnapshot
+    [Migration("20241211213416_Migration3")]
+    partial class Migration3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
