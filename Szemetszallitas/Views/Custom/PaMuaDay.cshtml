@@ -1,0 +1,36 @@
+﻿@model IEnumerable<DateTime>
+
+@{
+    ViewData["Title"] = "Többféle hulladék szállítása egy napon";
+}
+
+<h1>Többféle hulladék szállítása egy napon (PaMuaDay)</h1>
+
+@if (Model.Any())
+{
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Dátum</th>
+                <th scope="col">Hulladéktípus</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var date in Model)
+            {
+                <tr>
+                    <td>@date.ToString("yyyy-MM-dd")</td>
+                    <td>
+                        <span class="badge badge-primary">Papír</span>
+                        <span class="badge badge-success">Műanyag</span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Nem találhatóak dátumok, amikor papír és műanyag hulladékot is szállítottak.</p>
+}
+

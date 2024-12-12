@@ -48,6 +48,7 @@ namespace Szemetszallitas.Controllers
         // GET: Naptars/Create
         public IActionResult Create()
         {
+            ViewData["Szolgaltatasok"] = new SelectList(_context.Szolgaltatas, "Id", "tipus");
             return View();
         }
 

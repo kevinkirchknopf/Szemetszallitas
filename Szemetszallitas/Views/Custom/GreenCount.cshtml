@@ -1,7 +1,11 @@
-﻿@model int
-@{
+﻿@{
     ViewData["Title"] = "Zöldhulladék szállítások száma egy évben";
 }
+<div>
+    <h2>@ViewData["Title"]</h2>
+    <h3>
 
-<h2>@ViewData["Title"]</h2>
-<p class="badge badge-primary">@Model</p>
+        Ennyiszer volt zöldhulladék szállítás:
+        <span class="badge badge-primary"></span>@Model
+    </h3>
+</div>

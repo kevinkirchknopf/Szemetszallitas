@@ -1,0 +1,35 @@
+﻿@model dynamic
+
+@{
+    ViewData["Title"] = "Month with Most Waste";
+}
+
+<h1>Legtöbb hulladékot tartalmazó hónap</h1>
+
+@if (Model != null)
+{
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+              
+                <th scope="col">Hónap</th>
+                <th scope="col">Összes mennyiség</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                
+                <td>@Model.Month</td>
+                <td>@Model.TotalAmount</td>
+            </tr>
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Nem található adat a hulladék mennyiségéről.</p>
+}
+
+<p>
+    <a asp-action="Index">Vissza a listához</a>
+</p>
